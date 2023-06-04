@@ -1,4 +1,4 @@
-package com.backend.store.config;
+package com.backend.store.models;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
 @Configuration
-public class CloudinaryConfig {
+public class Cloud {
     @Value("${CLOUD_NAME}")
     private String cloudName;
 
