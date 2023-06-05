@@ -45,10 +45,10 @@ public class User {
 
     @DBRef
     private List<Address> addresses;
-    // @DBRef
-    // private List<Product> wishlist;
+    @DBRef
+    private List<Product> wishlist;
 
-    // private List<CartItem> cart;
+    private List<CartItem> cart;
 
     public User(String name, String email, String username, String password, String avatar) {
         this.name = name;
@@ -128,5 +128,21 @@ public class User {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public List<Product> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(List<Product> wishlist) {
+        this.wishlist = wishlist;
+    }
+
+    public List<CartItem> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<CartItem> cart) {
+        this.cart = cart;
     }
 }

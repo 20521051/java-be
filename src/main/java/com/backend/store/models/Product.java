@@ -3,6 +3,7 @@ package com.backend.store.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -11,14 +12,18 @@ public class Product {
 
     @Id
     private String id;
+    @Field("name")
     private String name;
 
     // @DBRef
     // private Category category;
-
+    @Field("price")
     private double price;
+    @Field("thumbnail")
     private String thumbnail;
+    @Field("images")
     private List<String> images;
+    @Field("description")
     private String description;
 
     // @DBRef
