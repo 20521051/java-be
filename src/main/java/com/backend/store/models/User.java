@@ -2,42 +2,39 @@ package com.backend.store.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
 import java.util.List;
 
 @Document(collection = "users")
 public class User {
     @Id
     private String id;
+    @Field(name = "name")
     private String name;
+    @Field(name = "email")
     private String email;
+    @Field(name = "username")
     private String username;
+    @Field(name = "password")
     private String password;
+    @Field(name = "avatar")
     private String avatar;
-    private Date birthday;
-    private String googleId;
-    private List<String> addresses;
-    private List<String> wishlist;
+    @Field(name = "address")
+    private String address;
+    @Field(name = "province")
     private List<CartItem> cart;
 
-    public User() {
-        // Default constructor
-    }
-
-    public User(String name, String email, String username, String password, String avatar,
-                Date birthday, String googleId, List<String> addresses, List<String> wishlist,
-                List<CartItem> cart) {
+    public User(String name, String email, String username, String password, String avatar) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
         this.avatar = avatar;
-        this.birthday = birthday;
-        this.googleId = googleId;
-        this.addresses = addresses;
-        this.wishlist = wishlist;
-        this.cart = cart;
+    }
+
+    public User() {
+        // default constructor
     }
 
     // Getter and setter methods for all fields
@@ -90,36 +87,12 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getAddress() {
+        return address;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getGoogleId() {
-        return googleId;
-    }
-
-    public void setGoogleId(String googleId) {
-        this.googleId = googleId;
-    }
-
-    public List<String> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<String> addresses) {
-        this.addresses = addresses;
-    }
-
-    public List<String> getWishlist() {
-        return wishlist;
-    }
-
-    public void setWishlist(List<String> wishlist) {
-        this.wishlist = wishlist;
+    public void setAddresses(String address) {
+        this.address = address;
     }
 
     public List<CartItem> getCart() {
@@ -129,4 +102,5 @@ public class User {
     public void setCart(List<CartItem> cart) {
         this.cart = cart;
     }
+
 }

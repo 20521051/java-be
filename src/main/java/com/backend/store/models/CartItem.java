@@ -2,12 +2,15 @@ package com.backend.store.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "cartItems")
 public class CartItem {
     @Id
     private String id;
+    @Field(name = "productId")
     private String productId;
+    @Field(name = "quantity")
     private int quantity;
 
     public CartItem() {
