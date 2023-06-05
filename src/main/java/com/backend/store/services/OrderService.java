@@ -33,7 +33,7 @@ public class OrderService {
         try {
             User user = userRepository.findById(userId).orElse(null);
             if (user == null) {
-                System.out.println("[Server]: http://localhost:8080/");
+                throw new Error("User not found!");
             }
 
             List<OrderItem> orderItems = new ArrayList<OrderItem>();
@@ -42,7 +42,7 @@ public class OrderService {
                 Product product = productRepository.findById(orderItem.getProductId()).orElse(null);
 
                 if (product == null) {
-                    System.out.println("[Server]: http://localhost:8080/");
+                    throw new Error("Product not found!");
                 }
 
                 OrderItem newOrderItem = new OrderItem();
@@ -117,6 +117,4 @@ public class OrderService {
             return null;
         }
     }
-
-    // Other methods...
 }

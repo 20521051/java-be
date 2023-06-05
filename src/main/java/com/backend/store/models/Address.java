@@ -36,12 +36,6 @@ public class Address {
     @Field(name = "receiver")
     private String receiver;
 
-    @Field(name = "default")
-    private boolean isDefault;
-
-    @Field(name = "deleted")
-    private boolean isDeleted;
-
     // Constructors, getters, setters, and other methods
     public String getId() {
         return id;
@@ -97,21 +91,5 @@ public class Address {
 
     public void setReceiver(String receiver) {
         this.receiver = receiver;
-    }
-
-    public boolean isDefault() {
-        return isDefault;
-    }
-
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
     }
 }

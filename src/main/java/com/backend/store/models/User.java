@@ -50,6 +50,14 @@ public class User {
 
     // private List<CartItem> cart;
 
+    public User(String name, String email, String username, String password, String avatar) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
+    }
+
     public String getId() {
         return id;
     }
