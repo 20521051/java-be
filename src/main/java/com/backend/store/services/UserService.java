@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.backend.store.models.Address;
 import com.backend.store.models.CartItem;
+import com.backend.store.models.Product;
 import com.backend.store.models.User;
 import com.backend.store.repositories.UserRepository;
 
