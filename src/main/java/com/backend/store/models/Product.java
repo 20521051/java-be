@@ -1,49 +1,63 @@
 package com.backend.store.models;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "products")
 public class Product {
-
-    @Id
-    private String id;
-    @Field("name")
+    @Field(name = "name")
     private String name;
 
-    // @DBRef
-    // private Category category;
-    @Field("price")
+    @DBRef
+    @Field(name = "category")
+    private Category category;
+
+    @Field(name = "price")
     private double price;
-    @Field("thumbnail")
+
+    @Field(name = "thumbnail")
     private String thumbnail;
-    @Field("images")
+
+    @Field(name = "images")
     private List<String> images;
-    @Field("description")
+
+    @Field(name = "description")
     private String description;
 
-    // @DBRef
-    // private List<Comment> comments;
+    @DBRef
+    @Field(name = "comments")
+    private List<Comment> comments;
 
+    @Field(name = "rating")
     private double rating;
+
+    @Field(name = "quantity")
     private int quantity;
 
+    @CreatedDate
+    @Field(name = "createdAt")
+    private Date createdAt;
+
+    @LastModifiedDate
+    @Field(name = "updatedAt")
+    private Date updatedAt;
+
     public Product() {
-        // Default constructor
     }
 
-    // Getters and setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public Product(String name, Category category, double price, List<String> images, String description,
+            int quantity) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.images = images;
+        this.description = description;
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -54,13 +68,13 @@ public class Product {
         this.name = name;
     }
 
-    // public Category getCategory() {
-    // return category;
-    // }
+    public Category getCategory() {
+        return category;
+    }
 
-    // public void setCategory(Category category) {
-    // this.category = category;
-    // }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public double getPrice() {
         return price;
@@ -94,13 +108,13 @@ public class Product {
         this.description = description;
     }
 
-    // public List<Comment> getComments() {
-    // return comments;
-    // }
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-    // public void setComments(List<Comment> comments) {
-    // this.comments = comments;
-    // }
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public double getRating() {
         return rating;
@@ -116,5 +130,21 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
