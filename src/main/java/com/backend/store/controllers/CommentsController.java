@@ -2,7 +2,7 @@ package com.backend.store.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.backend.store.models.Users;
+import com.backend.store.models.User;
 import com.backend.store.services.CommentService;
 import com.backend.store.services.UserService;
 import com.backend.store.models.*;
@@ -26,4 +26,3 @@ public class CommentsController {
         return commentService.createComment(dto, user.getUserId());
     }
 }
-

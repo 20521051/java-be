@@ -1,4 +1,5 @@
 package com.backend.store.services;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -6,10 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.backend.store.models.Category;
 import com.backend.store.repositories.CategoryRepository;
 import java.util.Optional;
+import com.backend.store.services.CloudinaryService;
 
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+
     @Autowired
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -61,8 +64,7 @@ public class CategoryService {
             System.out.println("error: " + e.getMessage());
             return null;
         }
-        }
-
+    }
 
     public Optional<Category> findCategoryById(String id) {
         return categoryRepository.findById(id);
