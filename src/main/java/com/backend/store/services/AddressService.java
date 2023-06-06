@@ -8,6 +8,8 @@ import com.backend.store.models.User;
 import com.backend.store.repositories.AddressRepository;
 import com.backend.store.repositories.UserRepository;
 
+import java.util.List;
+
 @Service
 public class AddressService {
     @Autowired
@@ -23,7 +25,9 @@ public class AddressService {
 
     public Address create(Address dto, String userId) {
         try {
-            User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+            User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found."));
+
+            List<String> addresses = user.getAddresses();
 
             Address newAddress = new Address();
             newAddress.setProvince(dto.getProvince());
@@ -33,33 +37,71 @@ public class AddressService {
             newAddress.setPhone(dto.getPhone());
             newAddress.setReceiver(dto.getReceiver());
 
-            Address savedAddress = addressRepository.save(newAddress);
-
+            Address result = addressRepository.save(newAddress);
+            addresses.add(newAddress.getId());
+            user.setAddresses(addresses);
             userRepository.save(user);
 
-            return savedAddress;
+            return result;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create address");
+            System.out.println("error: " + e.getMessage());
+            return null;
         }
     }
 
     public Address update(String id, Address dto, String userId) {
         try {
             Address address = addressRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Address not found"));
+                    .orElseThrow(() -> new Error("Address not found"));
 
-            address.setDistrict(dto.getDistrict());
-            address.setPhone(dto.getPhone());
-            address.setProvince(dto.getProvince());
-            address.setReceiver(dto.getReceiver());
-            address.setSpecificAddress(dto.getSpecificAddress());
-            address.setWard(dto.getWard());
+            if (dto.getDistrict() != null) {
+                address.setDistrict(dto.getDistrict());
+            }
+            if (dto.getDistrict() != null) {
+                address.setPhone(dto.getPhone());
+            }
+            if (dto.getDistrict() != null) {
+                address.setProvince(dto.getProvince());
+            }
+            if (dto.getDistrict() != null) {
+                address.setReceiver(dto.getReceiver());
+            }
+            if (dto.getDistrict() != null) {
+                address.setSpecificAddress(dto.getSpecificAddress());
+            }
+            if (dto.getDistrict() != null) {
+                address.setWard(dto.getWard());
+            }
 
             Address updatedAddress = addressRepository.save(address);
 
             return updatedAddress;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to update address");
+            System.out.println("error: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void delete(String id, String userId) {
+        try {
+            User user = userRepository.findById(userId).orElseThrow(() -> new Error("User not found."));
+
+            List<String> addresses = user.getAddresses();
+
+            boolean isNotFound = true;
+            for (String item : addresses) {
+                if (item == id) {
+                    addresses.remove(item);
+                    isNotFound = false;
+                }
+            }
+            if (isNotFound == false)
+                throw new Error("Address not exists.");
+            user.setAddresses(addresses);
+            userRepository.save(user);
+
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
         }
     }
 }
