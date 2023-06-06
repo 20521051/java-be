@@ -1,9 +1,12 @@
 package com.backend.store.models;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +19,11 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "admin")
+@Document(collection = "admins")
 public class Admin {
     @Id
+    @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
     private String id;
 
     @Field(name = "name", targetType = FieldType.STRING)
@@ -30,12 +35,15 @@ public class Admin {
     @Field(name = "password", targetType = FieldType.STRING)
     private String password;
 
+    @CreatedDate
     @Field(name = "createdAt", targetType = FieldType.DATE_TIME)
     private LocalDateTime createdAt;
 
+    @LastModifiedDate
     @Field(name = "updatedAt", targetType = FieldType.DATE_TIME)
     private LocalDateTime updatedAt;
 
+    // Constructors, getters, and setters
     public String getId() {
         return id;
     }

@@ -1,39 +1,49 @@
 package com.backend.store.models;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-import java.util.Date;
 
-@Document(collection = "comment")
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "comments")
 public class Comment {
+    @Id
     @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
     private String id;
 
-    @Field(name = "content")
+    @Field(name = "content", targetType = FieldType.STRING)
     private String content;
 
-    @Field(name = "rate")
+    @Field(name = "rate", targetType = FieldType.INT32)
     private int rate;
 
-    @Field(name = "user")
+    @Field(name = "user", targetType = FieldType.STRING)
     private String userId;
 
     @CreatedDate
-    @Field(name = "createdAt")
-    private Date createdAt;
+    @Field(name = "createdAt", targetType = FieldType.DATE_TIME)
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Field(name = "updatedAt")
-    private Date updatedAt;
+    @Field(name = "updatedAt", targetType = FieldType.DATE_TIME)
+    private LocalDateTime updatedAt;
 
     // Constructors, getters, and setters
-
-    public Comment() {
-    }
-
     public Comment(String content, int rate, String userId) {
         this.content = content;
         this.rate = rate;
@@ -72,19 +82,19 @@ public class Comment {
         this.userId = userId;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

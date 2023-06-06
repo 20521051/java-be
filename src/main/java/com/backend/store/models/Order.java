@@ -4,32 +4,49 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "orders")
 public class Order {
     @Id
+    @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
     private String id;
 
-    @DBRef
-    @Field("user")
+    @Field(name = "user", targetType = FieldType.STRING)
     private String userId;
 
-    @DBRef
-    @Field("address")
+    @Field(name = "address", targetType = FieldType.STRING)
     private String addressId;
 
-    @DBRef
-    @Field("orderItems")
+    @Field(name = "orderItems", targetType = FieldType.ARRAY)
     private List<OrderItem> orderItems;
 
-    @Field("total")
+    @Field(name = "total", targetType = FieldType.INT64)
     private double total;
 
-    @Field("status")
+    @Field(name = "status", targetType = FieldType.STRING)
     private String status;
 
+    @Field(name = "shortId", targetType = FieldType.STRING)
+    private String shortId;
+
+    @Field(name = "paymentMethod", targetType = FieldType.STRING)
+    private String paymentMethod;
+
+    // Constructors, getters, and setters
     public String getId() {
         return id;
     }
@@ -60,6 +77,22 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getShortId() {
+        return shortId;
+    }
+
+    public void setShortId(String shortId) {
+        this.shortId = shortId;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public String getUserId() {

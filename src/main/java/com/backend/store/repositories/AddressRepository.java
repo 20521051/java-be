@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AddressRepository extends MongoRepository<Address, String> {
-    // Các phương thức truy vấn tùy chỉnh có thể được thêm ở đây (nếu cần)
 }

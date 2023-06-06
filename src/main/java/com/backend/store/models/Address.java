@@ -3,6 +3,8 @@ package com.backend.store.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,30 +15,38 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "address")
+@Document(collection = "addresses")
 public class Address {
     @Id
+    @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
     private String id;
 
-    @Field(name = "province")
+    @Field(name = "province", targetType = FieldType.STRING)
     private String province;
 
-    @Field(name = "district")
+    @Field(name = "district", targetType = FieldType.STRING)
     private String district;
 
-    @Field(name = "ward")
+    @Field(name = "ward", targetType = FieldType.STRING)
     private String ward;
 
-    @Field(name = "specificAddress")
+    @Field(name = "specificAddress", targetType = FieldType.STRING)
     private String specificAddress;
 
-    @Field(name = "phone")
+    @Field(name = "phone", targetType = FieldType.STRING)
     private String phone;
 
-    @Field(name = "receiver")
+    @Field(name = "receiver", targetType = FieldType.STRING)
     private String receiver;
 
-    // Constructors, getters, setters, and other methods
+    @Field(name = "default", targetType = FieldType.BOOLEAN)
+    private Boolean isDefault;
+
+    @Field(name = "deleted", targetType = FieldType.BOOLEAN)
+    private Boolean deleted;
+
+    // Constructors, getters, and setters
     public String getId() {
         return id;
     }
@@ -91,5 +101,21 @@ public class Address {
 
     public void setReceiver(String receiver) {
         this.receiver = receiver;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }

@@ -6,5 +6,4 @@ import com.backend.store.models.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
-    // Các phương thức tùy chỉnh nếu cần thiết
 }

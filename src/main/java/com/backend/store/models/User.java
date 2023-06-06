@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,36 +22,44 @@ import java.util.List;
 @Document(collection = "users")
 public class User {
     @Id
+    @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
     private String id;
 
-    @Field(name = "name")
+    @Field(name = "name", targetType = FieldType.STRING)
     private String name;
 
-    @Field(name = "email")
+    @Field(name = "email", targetType = FieldType.STRING)
     private String email;
 
-    @Field(name = "username")
+    @Field(name = "username", targetType = FieldType.STRING)
     private String username;
 
-    @Field(name = "password")
+    @Field(name = "password", targetType = FieldType.STRING)
     private String password;
 
-    @Field(name = "avatar")
+    @Field(name = "avatar", targetType = FieldType.STRING)
     private String avatar;
 
-    @Field(name = "birthday")
+    @Field(name = "birthday", targetType = FieldType.DATE_TIME)
     private Date birthday;
 
-    @Field(name = "googleId")
+    @Field(name = "googleId", targetType = FieldType.STRING)
     private String googleId;
 
-    @DBRef
-    private List<Address> addresses;
-    @DBRef
-    private List<Product> wishlist;
+    @MongoId
+    @Field(name = "addresses", targetType = FieldType.ARRAY)
+    private List<String> addresses;
 
-    private List<CartItem> cart;
+    @MongoId
+    @Field(name = "wishlist", targetType = FieldType.ARRAY)
+    private List<String> wishlist;
 
+    @MongoId
+    @Field(name = "cart", targetType = FieldType.ARRAY)
+    private List<String> cart;
+
+    // Constructors, getters, and setters
     public User(String name, String email, String username, String password, String avatar) {
         this.name = name;
         this.email = email;
@@ -122,27 +132,27 @@ public class User {
         this.googleId = googleId;
     }
 
-    public List<Address> getAddresses() {
+    public List<String> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<String> addresses) {
         this.addresses = addresses;
     }
 
-    public List<Product> getWishlist() {
+    public List<String> getWishlist() {
         return wishlist;
     }
 
-    public void setWishlist(List<Product> wishlist) {
+    public void setWishlist(List<String> wishlist) {
         this.wishlist = wishlist;
     }
 
-    public List<CartItem> getCart() {
+    public List<String> getCart() {
         return cart;
     }
 
-    public void setCart(List<CartItem> cart) {
+    public void setCart(List<String> cart) {
         this.cart = cart;
     }
 }

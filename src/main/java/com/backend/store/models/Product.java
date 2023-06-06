@@ -1,56 +1,72 @@
 package com.backend.store.models;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "products")
 public class Product {
-    @Field(name = "name")
+    @Id
+    @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
+    private String id;
+
+    @MongoId
+    @Field(name = "name", targetType = FieldType.STRING)
     private String name;
 
-    @DBRef
-    @Field(name = "category")
-    private Category category;
+    @MongoId
+    @Field(name = "category", targetType = FieldType.STRING)
+    private String category;
 
-    @Field(name = "price")
+    @Field(name = "price", targetType = FieldType.INT64)
     private double price;
 
-    @Field(name = "thumbnail")
+    @Field(name = "thumbnail", targetType = FieldType.STRING)
     private String thumbnail;
 
-    @Field(name = "images")
+    @Field(name = "images", targetType = FieldType.ARRAY)
     private List<String> images;
 
-    @Field(name = "description")
+    @Field(name = "description", targetType = FieldType.STRING)
     private String description;
 
-    @DBRef
-    @Field(name = "comments")
-    private List<Comment> comments;
+    @MongoId
+    @Field(name = "comments", targetType = FieldType.ARRAY)
+    private List<String> comments;
 
-    @Field(name = "rating")
+    @Field(name = "rating", targetType = FieldType.INT64)
     private double rating;
 
-    @Field(name = "quantity")
+    @Field(name = "quantity", targetType = FieldType.INT32)
     private int quantity;
 
     @CreatedDate
-    @Field(name = "createdAt")
+    @Field(name = "createdAt", targetType = FieldType.DATE_TIME)
     private Date createdAt;
 
     @LastModifiedDate
-    @Field(name = "updatedAt")
+    @Field(name = "updatedAt", targetType = FieldType.DATE_TIME)
     private Date updatedAt;
 
-    public Product() {
-    }
-
-    public Product(String name, Category category, double price, List<String> images, String description,
+    public Product(String name, String category, double price, List<String> images, String description,
             int quantity) {
         this.name = name;
         this.category = category;
@@ -68,11 +84,11 @@ public class Product {
         this.name = name;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -108,11 +124,11 @@ public class Product {
         this.description = description;
     }
 
-    public List<Comment> getComments() {
+    public List<String> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<String> comments) {
         this.comments = comments;
     }
 

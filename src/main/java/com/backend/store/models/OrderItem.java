@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,32 +21,34 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Document(collection = "orderItems")
 public class OrderItem {
-
     @Id
+    @MongoId
+    @Field(name = "_id", targetType = FieldType.STRING)
     private String id;
 
-    @Field("product")
+    @Field(name = "product", targetType = FieldType.STRING)
     private String productId;
 
+    @Field(name = "price", targetType = FieldType.INT64)
     private double price;
 
+    @Field(name = "quantity", targetType = FieldType.INT32)
     private int quantity;
 
     @CreatedDate
+    @Field(name = "createAt", targetType = FieldType.DATE_TIME)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Field(name = "updateAt", targetType = FieldType.DATE_TIME)
     private LocalDateTime updatedAt;
 
-    // Constructors
-
+    // Constructors, getters, and setters
     public OrderItem(String productId, double price, int quantity) {
         this.productId = productId;
         this.price = price;
         this.quantity = quantity;
     }
-
-    // Getters and setters
 
     public String getId() {
         return id;
