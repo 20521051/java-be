@@ -13,14 +13,11 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
-// http://localhost:8080/swagger-ui/index.html
-// http://localhost:8080/v3/api-docs
-
 @OpenAPIDefinition
 @Configuration
 public class OpenAPIConfig {
-    @Value("${PORT}")
-    private String port;
+    @Value("${server.url}")
+    private String serverUrl;
 
     @Value("${bezkoder.openapi.prod-url}")
     private String prodUrl;
@@ -28,7 +25,7 @@ public class OpenAPIConfig {
     @Bean
     public OpenAPI OpenAPI() {
         Server devServer = new Server();
-        devServer.setUrl("http://localhost:8080/");
+        devServer.setUrl(serverUrl);
         devServer.setDescription("Server URL in Development environment");
 
         Server prodServer = new Server();
@@ -46,10 +43,9 @@ public class OpenAPIConfig {
                 .version("1.0")
                 .contact(contact)
                 .description("This API exposes endpoints to manage decoration shop.")
-                // .termsOfService("https://www.bezkoder.com/terms")
+                .termsOfService("https://www.bezkoder.com/terms")
                 .license(mitLicense);
 
         return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
     }
-
 }

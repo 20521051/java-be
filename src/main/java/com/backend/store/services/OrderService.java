@@ -14,8 +14,7 @@ import com.backend.store.models.User;
 import com.backend.store.repositories.OrderRepository;
 import com.backend.store.repositories.ProductRepository;
 import com.backend.store.repositories.UserRepository;
-import com.backend.store.services.CloudinaryService;
-import com.backend.store.utils.Shuffle;
+// import com.backend.store.services.CloudinaryService;
 
 @Service
 public class OrderService {

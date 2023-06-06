@@ -8,10 +8,11 @@ import com.backend.store.models.User;
 import com.backend.store.repositories.AddressRepository;
 import com.backend.store.repositories.UserRepository;
 
-
 @Service
 public class AddressService {
+    @Autowired
     private final AddressRepository addressRepository;
+    @Autowired
     private final UserRepository userRepository;
 
     @Autowired
